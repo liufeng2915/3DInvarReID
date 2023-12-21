@@ -39,8 +39,8 @@ Please refer to [matching/README](matching/README.md) for the details.
 
 Here are some great resources we benefit from:
 
-* [gDNA](https://github.com/xuchen-ethz/gdna) 3D clothed human model modeling.
-* [Simple-CCReID](https://github.com/guxinqian/Simple-CCReID) person re-identification.
+* [gDNA](https://github.com/xuchen-ethz/gdna) for 3D clothed human model modeling.
+* [Simple-CCReID](https://github.com/guxinqian/Simple-CCReID) for person re-identification.
 
 ## License
 
