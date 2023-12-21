@@ -1,0 +1,52 @@
+defaults:
+  - datamodule: data
+  - network: lbs 
+  - network: naked_shape
+  - network: disp
+  - network: clothed_shape
+  - network: texture
+
+hydra:
+  run:
+    dir: outputs/${expname}/
+
+expname: joint
+resume: false
+starting_path: 'checkpoints/1259.pth'
+eval_mode: interp
+seed: 42
+agent_tot: 1
+agent_id: 0
+
+trainer:
+  max_epochs: 2000
+  gradient_clip_val: 0.1
+  check_val_every_n_epoch: 1
+  lr_scheduler_stepsize: [500,1000,1500]
+  lr_schedule_decay_rate: 0.1
+  deterministic: true
+  gpus: -1
+  log_every_n_steps: 5
+  accelerator: 'ddp'
+  profiler: 'simple'
+
+
+model:
+  dim_naked_shape: 512
+  dim_clothed_shape: 512
+  dim_texture: 512
+
+  deformer:
+    _target_: lib.model.deformer.ForwardDeformer
+    max_steps: 50
+    
+  optim:
+    lr: 1e-3
+
+  nepochs_pretrain: 10    #1
+  pretrain_bone: true
+  nepochs_pretrain_coarse: 0    #1
+  lambda_bone_occ: 1
+  lambda_bone_w: 10
+  lambda_disp: 10
+  lambda_reg: 1e-3

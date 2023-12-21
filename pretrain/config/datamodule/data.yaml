@@ -1,0 +1,8 @@
+datamodule:
+  dataset_path: ./data
+  data_list: ./lib/dataset/data.csv
+  cache_path: ${starting_path}
+  num_workers: 4 #16
+  batch_size: 16  #16
+  points_per_frame: 2000
+  
