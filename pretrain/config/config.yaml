@@ -12,7 +12,7 @@ hydra:
 
 expname: joint
 resume: false
-starting_path: 'checkpoints/1259.pth'
+starting_path: 'checkpoints/0.pth'
 eval_mode: interp
 seed: 42
 agent_tot: 1
@@ -21,7 +21,7 @@ agent_id: 0
 trainer:
   max_epochs: 2000
   gradient_clip_val: 0.1
-  check_val_every_n_epoch: 1
+  check_val_every_n_epoch: 10
   lr_scheduler_stepsize: [500,1000,1500]
   lr_schedule_decay_rate: 0.1
   deterministic: true

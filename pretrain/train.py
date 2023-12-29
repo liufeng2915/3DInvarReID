@@ -51,7 +51,7 @@ def main(opt):
     with open('.hydra/config.yaml', 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
     wandb.init(config=config, 
-               project='ICCV23_step1',
+               project='3DInvarReID_pretrain',
                name=opt.expname, 
                job_type="training", 
                reinit=True)
@@ -75,10 +75,9 @@ def main(opt):
                     )
     # model loading
     checkpoint_path = opt.starting_path
-    if not (os.path.exists(checkpoint_path) and opt.resume):
-        checkpoint_path = None
-        #model_dict = torch.load(checkpoint_path)
-        #model.load_state_dict(model_dict)
+    if (os.path.exists(checkpoint_path) and opt.resume):
+        model_dict = torch.load(checkpoint_path)
+        model.load_state_dict(model_dict)
 
     ## optimizer 
     optimizer, scheduler = configure_optimizers(model, opt)
@@ -94,7 +93,6 @@ def main(opt):
         for data_index, train_batch in enumerate(train_dataloader):
             
             train_batch = to_gpu(train_batch)
-            #model.validation_step(epoch, train_batch)
             ## 
             loss = model.training_step(epoch, train_batch)
 
@@ -108,8 +106,7 @@ def main(opt):
 
         ## visualization
         model.eval()
-        #if (epoch % opt.trainer.check_val_every_n_epoch) == 0:
-        if ((epoch+1) % 10) == 0:
+        if ((epoch+1) % opt.trainer.check_val_every_n_epoch) == 0:
             save_checkpoints(model, epoch)
             for data_index, val_batch in enumerate(val_dataloader):
                 if (data_index % 5) == 0:

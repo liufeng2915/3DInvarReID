@@ -1,34 +1,7 @@
 
-from lib.model.unet3d import*
-
-class Generator_voxel(nn.Module):
-    def __init__(self, z_dim, n_layers=3):
-        super().__init__()
-
-        self.layers = nn.Sequential(
-            nn.ConvTranspose3d(in_channels=z_dim, out_channels=256, kernel_size=4, stride=1),
-            nn.BatchNorm3d(256),
-            nn.LeakyReLU(negative_slope=0.2),
-
-            nn.ConvTranspose3d(in_channels=256, out_channels=128, kernel_size=4, stride=2, padding=1),
-            nn.BatchNorm3d(128),
-            nn.LeakyReLU(negative_slope=0.2),
-
-            nn.ConvTranspose3d(in_channels=128, out_channels=64, kernel_size=4, stride=2, padding=1),
-            nn.BatchNorm3d(64),
-            nn.LeakyReLU(negative_slope=0.2),
-
-            nn.ConvTranspose3d(in_channels=64, out_channels=64, kernel_size=4, stride=2, padding=1),
-            nn.BatchNorm3d(64),
-        )
-
-        self.unet = UNet3D(in_channels=64, out_channels=64, num_levels=n_layers)
-
-    def forward(self, z):
-        z = z.reshape((-1, z.shape[1], 1, 1, 1))
-        feat = self.layers(z)
-        feat = self.unet(feat)
-        return feat
+import torch
+import torch.nn as nn
+from torch.nn import functional as F
 
 class Generator(nn.Module):
     def __init__(self, z_dim, n_layers=3):
@@ -71,8 +44,6 @@ class Generator(nn.Module):
                 h = actvn( adaIN(h,lin(z)))
 
         return h
-
-
 
 def actvn(x):
     out = F.leaky_relu(x, inplace=True)
