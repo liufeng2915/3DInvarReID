@@ -1,0 +1,16 @@
+datamodule:
+  dataset_path: ./data
+  data_list: ./lib/dataset/data.csv
+  cache_path: ${starting_path}
+  num_workers: 4 #16
+  batch_size: 16  #16
+  points_per_frame: 2000
+
+  reid_data: celeb
+  num_instances: 4
+  rendering_img_height: 256
+  rendering_img_width: 128
+  img_height: 384
+  img_width: 192
+  num_classes: 632
+  img_batch_size: 8 #32
