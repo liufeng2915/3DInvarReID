@@ -11,7 +11,7 @@ mkdir lib/smpl/smpl_model/
 mv /path/to/smpl/models/basicModel_f_lbs_10_207_0_v1.0.0.pkl lib/smpl/smpl_model/SMPL_NEUTRAL.pkl
 ```
 
-## Prepare Training Data[preprocess_thuman_data.py](data%2Fpreprocess_thuman_data.py)
+## Prepare Training Data
 We combine THuman2.0 (526 scans) and CAPE (3, 000 scans) to train our joint two-layer implicit model.
 
 ***1. THuman 2.0 dataset***
