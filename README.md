@@ -23,6 +23,8 @@ Please refer to [pretrain/README](pretrain/README.md) for the details.
 ## Stage2: Person Re-Identification
 Please refer to [matching/README](matching/README.md) for the details.
 
+## The Cloth-Changing and Diverse Activities (CCDA) dataset
+Please find the dataest [here](https://drive.google.com/file/d/1Hz2zqtBpNCHwuUtLPC4dAqdIXR0ZQiJA/view?usp=sharing) 
 
 ## Citation
 
